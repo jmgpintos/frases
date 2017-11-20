@@ -1,0 +1,14 @@
+<?php
+
+define('APP_PATH', ROOT . 'application' . DS); //directorio de la aplicacion
+define('LIB_PATH', ROOT . 'libs' . DS); //Directorio de librerias
+define('BASE_URL', 'http://localhost/pfc/');
+
+
+define('CLASS_DIRS', array(
+                        'application/',
+                        'libs/',
+                        'controllers/',
+                        'models/',
+                        'views/'
+                        )); //Directorios donde estan las diferents clases (para autoload)
