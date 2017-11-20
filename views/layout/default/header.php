@@ -13,8 +13,8 @@
 
             <div id="menu_top">
                 <ul>
-                    <?php if (isset($_layoutParams['menu'])): ?>
-                        <?php foreach ($_layoutParams['menu'] as $key => $value):
+                    <?php if (isset($this->_layoutParams['menu'])): ?>
+                        <?php foreach ($this->_layoutParams['menu'] as $key => $value):
                             ?>
                             <li>
                                 <a href="<?php echo $value['enlace'] ?>"><?php echo $value['titulo'] ?></a>

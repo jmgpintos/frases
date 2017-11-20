@@ -17,16 +17,14 @@ class Request {
      */
     public function __construct() {
 //        debug_fn(__METHOD__, [$url]);
+        
         if (isset($_GET['url'])) {
-            $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL);
-            $url = explode("/", $url);
-            $url = array_filter($url);
+            $url = array_filter(explode("/", filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL)));
 
             $this->_controlador = strtolower(array_shift($url));
             $this->_metodo = strtolower(array_shift($url));
             $this->_argumentos = $url;
         }
-
 
         if (!$this->_controlador) {
             $this->_controlador = DEFAULT_CONTROLLER;
@@ -39,7 +37,6 @@ class Request {
         if (!isset($this->_argumentos)) {
             $this->_argumentos = array();
         }
-
 
         debug($this->getControlador(), 'controlador', true);
         debug($this->getMetodo(), 'metodo');

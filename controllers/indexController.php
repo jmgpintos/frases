@@ -9,7 +9,7 @@ class indexController extends Controller{
     public function index() {
         $usuario = $this->loadModel('usuario');
 
-        $this->_view->usuarios = $usuario->getUsuarios();
+        $this->_view->usuarios = $usuario->getAll();
         $this->_view->titulo = 'Portada';
         $this->_view->renderizar('index');
     }

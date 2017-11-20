@@ -32,10 +32,11 @@ class View {
             'ruta_js' => BASE_URL . 'views/layout/' . DEFAULT_LAYOUT . '/js/',
             'menu' => $menu
         );
+        debug($_layoutParams, '$_layoutParams');
         return $_layoutParams;
     }
 
-    public function _getMenu() {
+    private function _getMenu() {
         $menu = array(
             array(
                 'id' => 'inicio',
@@ -48,6 +49,7 @@ class View {
                 'enlace' => BASE_URL . 'hola'
             )
         );
+        debug($menu, 'menu');
         return $menu;
     }
 

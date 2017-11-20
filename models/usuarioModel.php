@@ -1,15 +1,17 @@
 <?php
 
 class UsuarioModel extends Model{
+    private $_table = 'usuario';
     
     public function __construct() {
         parent::__construct();
     }
     
-    public function getUsuarios() {
-        $usuario = $this->_db->query("SELECT * FROM usuario");
+    public function getAll($table = '') {
+        return parent::getAll($this->_table);
+//        $usuario = $this->_db->query("SELECT * FROM usuario");
         
         
-        return $usuario->fetchAll(PDO::FETCH_ASSOC);
+//        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }
