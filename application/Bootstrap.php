@@ -8,7 +8,7 @@ class Bootstrap {
     public static function run(Request $peticion) {
         $controller = $peticion->getControlador() . 'Controller';
         $rutaControlador = ROOT . 'controllers' . DS . $controller . '.php';
-        debug($rutaControlador, ' rutaControlador');
+//        debug($rutaControlador, ' rutaControlador');
 
         $metodo = $peticion->getMetodo();
         $args = $peticion->getArgs();

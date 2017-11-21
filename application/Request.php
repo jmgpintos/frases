@@ -38,9 +38,9 @@ class Request {
             $this->_argumentos = array();
         }
 
-        debug($this->getControlador(), 'controlador', true);
-        debug($this->getMetodo(), 'metodo');
-        debug($this->getArgs(), 'argumentos');
+//        debug($this->getControlador(), 'controlador', true);
+//        debug($this->getMetodo(), 'metodo');
+//        debug($this->getArgs(), 'argumentos');
     }
 
     public function getControlador() {

@@ -11,15 +11,16 @@ abstract class Controller {
     abstract public function index();
 
     protected function loadModel($modelo) {
+//        debug_fn(__METHOD__, [$url]);
         $modelo = $modelo . 'Model';
         $rutaModelo = ROOT . 'models' . DS . $modelo . '.php';
-        
-        if(is_readable($rutaModelo)) {
+
+        if (is_readable($rutaModelo)) {
             require_once $rutaModelo;
             $modelo = new $modelo;
+//        debug($rutaModelo, 'rutaModelo');
             return $modelo;
-        }
-        else {
+        } else {
             throw new Exception('Error de modelo: ' . $rutaModelo);
         }
     }

@@ -7,10 +7,11 @@ define('ROOT', realpath(dirname(__FILE__)) . DS); //ruta raiz de la aplicacion e
 require_once 'libs/helpers/debug_msg.php';
 require_once ROOT. 'config/config.php';
 require_once 'libs/helpers/autoloader.php';
+require_once 'libs/helpers/helpers.php';
 
 //debug($_GET['url'], 'url');
 
-
+Session::init();
 try {
     Bootstrap::run(new Request());
 } catch (Exception $e) {
