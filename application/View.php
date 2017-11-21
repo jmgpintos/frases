@@ -32,7 +32,7 @@ class View {
             'ruta_js' => BASE_URL . 'views/layout/' . DEFAULT_LAYOUT . '/js/',
             'menu' => $menu
         );
-        debug($_layoutParams, '$_layoutParams');
+//        debug($_layoutParams, '$_layoutParams');
         return $_layoutParams;
     }
 
@@ -49,7 +49,7 @@ class View {
                 'enlace' => BASE_URL . 'hola'
             )
         );
-        debug($menu, 'menu');
+//        debug($menu, 'menu');
         return $menu;
     }
 

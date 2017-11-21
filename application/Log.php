@@ -28,8 +28,8 @@ class Log
      */
     public function write($message, $level = LOG_NOTICE)
     {
-        debug_fn(__METHOD__);
-        debug($message);
+//        debug_fn(__METHOD__);
+//        debug($message);
         if ($level <= LOG_LEVEL) {
             if (Session::estaAutenticado()) {
                 $usuario = Session::get('id_usuario');
@@ -37,7 +37,7 @@ class Log
             else {
                 $usuario = 'No autenticado';
             }
-        debug($this->_filename,'log_filename');
+//        debug($this->_filename,'log_filename');
             $handle = fopen($this->_filename, 'a+');
             debug($handle, 'handle');
             fwrite($handle,

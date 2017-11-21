@@ -1,0 +1,17 @@
+
+<h2>FRASES</h2>
+
+<pre>
+    <?php // debug($this->frases);?>
+    <?php // print_r($this->frases[0]['autor']);?>
+</pre>
+
+<table >
+    <?php foreach ($this->frases as $frase):?>
+    <tr>
+        <td><?php echo $frase['frase'];?></td>
+        <td><?php echo $frase['autor']['nombre'];?></td>
+        <td><?php echo $frase['categoria']['nombre']; ?></td>
+    </tr>
+    <?php endforeach;?>
+</table>

@@ -34,7 +34,6 @@ class Model {
 //        debug_fn(__METHOD__, [$url]);
         $this->_db = new Database();
         $this->_log = new Log();
-//        debug('log creado');
     }
 
     /**
@@ -51,10 +50,11 @@ class Model {
      * @return int 
      */
     public function getCount($table) {
-//        $this->_log->write(__METHOD__ . ' - table => ' . $table);
+        $this->_log->write(__METHOD__ . ' - table => ' . $table);
         $table = $this->_getTableName($table);
 
         $sql = "SELECT COUNT(*) FROM $table";
+        $this->_log->write($sql);
         $row = $this->_db->query($sql);
         return $row->fetch()[0];
     }
@@ -77,7 +77,7 @@ class Model {
     public function getAll($table, array $campos = array()) {
         $this->_log->write(__METHOD__
                 . ' - tabla => ' . $table
-                . ', campos: ' . $campos);
+                . ', campos: ' . array_to_str($campos));
 
         $table = $this->_getTableName($table);
 
@@ -89,19 +89,41 @@ class Model {
         }
 
         $sql = "SELECT " . $listaCampos . "FROM $table ORDER BY id";
+        $this->_log->write($sql);
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getById(String $table, int $index) {
+    public function getAllPaginated(String $table, array $campos = array(), int $i, int $u) {
         $this->_log->write(__METHOD__
                 . ' - tabla => ' . $table
-                . ', index: ' . $index);
+                . ', campos: ' . array_To_str($campos));
 
         $table = $this->_getTableName($table);
 
-        $id = (int) $index;
-        $sql = "SELECT * FROM $table WHERE id=$index";
+        if (count($campos)) {
+            $listaCampos = 'id, ';
+            $listaCampos .= implode(", ", $campos);
+        } else {
+            $listaCampos = '*';
+        }
+
+        $sql = "SELECT " . $listaCampos . "FROM $table ORDER BY id LIMIT $i, $u";
+        $this->_log->write($sql);
+        $row = $this->_db->query($sql);
+        return $row->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getById(String $table, int $id) {
+        $this->_log->write(__METHOD__
+                . ' - tabla => ' . $table
+                . ', index: ' . $id);
+
+        $table = $this->_getTableName($table);
+
+        $id = (int) $id;
+        $sql = "SELECT * FROM $table WHERE id=$id ";
+        $this->_log->write($sql);
 
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
@@ -138,7 +160,7 @@ class Model {
         }
 
         $sql = "INSERT INTO $table (" . rtrim($str_columnas, ', ') . ") VALUES(" . rtrim($str_campos, ', ') . ")"; //el primer campo (null) es el id
-
+        $this->_log->write($sql);
         //ejecutar consulta
         $this->_db->prepare($sql)
                 ->execute($campos);
@@ -191,6 +213,7 @@ class Model {
                 . ' registro editado - tabla =>' . $table
                 . ', index => ' . $index
                 . ', campos: ' . array_to_str($campos));
+        $this->_log->write($sql);
 
         $stmt = $this->_db->prepare($sql);
         return $stmt->execute($campos);
@@ -219,6 +242,7 @@ class Model {
 
         //Borrar registro
         $sql = "DELETE FROM $table WHERE id=$id";
+        $this->_log->write($sql);
 
         if ($this->_db->query($sql)) {
             return $reg_borrado;
@@ -249,6 +273,7 @@ class Model {
         }
 
         $sql = "SELECT * FROM $table WHERE " . rtrim($condicion, ' AND ') . " LIMIT 1";
+        $this->_log->write($sql);
 
         $row = $this->_db_->query($sql);
 
@@ -276,6 +301,7 @@ class Model {
 
         //@TODO poner nombres campos como constantes
         $sql = "UPDATE $table SET ultimo_acceso=now() WHERE id = :id";
+        $this->_log->write($sql);
 
         $this->_db->prepare($sql)
                 ->execute($campos);
@@ -322,6 +348,7 @@ class Model {
         $table = $this->getTableName($table);
 
         $SQL = "SELECT id, nombre FROM {$table} ORDER BY {$order}";
+        $this->_log->write($sql);
 
         $row = $this->_db->query($SQL);
 
@@ -341,6 +368,7 @@ class Model {
         $table = $this->getTableName($table);
 
         $rs = $this->_db->query("SELECT * FROM $table LIMIT 0");
+        $this->_log->write($sql);
         for ($i = 0; $i < $rs->columnCount(); $i++) {
             $col = $rs->getColumnMeta($i);
             $columns[] = $col['name'];
@@ -355,6 +383,7 @@ class Model {
      */
     public function getTableInfo($table) {
         $sql = "SHOW COLUMNS FROM  {$table}";
+        $this->_log->write($sql);
 
         $row = $this->_db->query($sql);
 
@@ -363,6 +392,7 @@ class Model {
 
     public function primero($tabla) {
         $sql = "SELECT id FROM $tabla ORDER BY id LIMIT 1";
+        $this->_log->write($sql);
 
         $row = $this->_db->query($sql);
 
@@ -371,6 +401,7 @@ class Model {
 
     public function ultimo($tabla) {
         $sql = "SELECT id FROM $tabla ORDER BY id DESC LIMIT 1";
+        $this->_log->write($sql);
 
         $row = $this->_db->query($sql);
 
@@ -384,7 +415,7 @@ class Model {
      * Borrar los registros a partir de un id dado
      * 
      * @param string $table Nombre de la tabla con o sin prefijo (TABLES_PREFIX)
-     * @param type $id_minimo valor del campo id a partir del cual se borran los registros
+     * @param type $id_minimo valor del campo. id a partir del cual se borran los registros
      */
     public function borrarPruebas($tabla, $id_minimo) {
         $post = $this->_db->query("DELETE FROM $tabla WHERE id > $id_minimo ");

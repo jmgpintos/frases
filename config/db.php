@@ -1,6 +1,5 @@
 <?php
 
-    debug_simple(ENV);
 if (ENV == 'local') {
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
@@ -17,3 +16,9 @@ if (ENV == 'local') {
     define('TABLES_PREFIX','');
 }
 
+
+define('REGISTROS_POR_PAGINA', 10);
+
+define('REGISTROS_POR_PAGINA_LIST', REGISTROS_POR_PAGINA);
+define('REGISTROS_POR_PAGINA_CARD', 10);
+define('REGISTROS_POR_PAGINA_TABLE', 7);

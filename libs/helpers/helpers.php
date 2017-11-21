@@ -387,7 +387,6 @@ if (!function_exists('array_to_str')) {
 
     function array_to_str($arr)
     {
-        debug_fn(__METHOD__, [$url]);
         $r = null;
         foreach ($arr as $key => $value) {
             $key = ltrim($key, ":");

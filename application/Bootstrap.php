@@ -14,6 +14,8 @@ class Bootstrap {
         $args = $peticion->getArgs();
 
         if (is_readable($rutaControlador)) {
+//            debug($rutaControlador);
+//            debug($controller);
             require_once $rutaControlador;
 
             $controller = new $controller;
