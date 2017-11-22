@@ -1,23 +1,24 @@
 <?php
 
-class citaController extends Controller {
+class usuarioController extends Controller {
 
-    private $_titulo = 'Citas';
+    private $_titulo = 'Usuarios';
     private $_model;
 
     public function __construct() {
         parent::__construct();
-        $this->_model = $this->loadModel('cita');
+        $this->_model = $this->loadModel('usuario');
     }
 
     public function index() {
         debug_fn(__METHOD__);
-        $cita = $this->_model;
+        $model = $this->_model;
 
-        $frases = $cita->getAllPaginated();
+        $usuarios = $model->getAllPaginated();
 
-        $this->_view->frases = $frases;
-        $this->_view->titulo = $this->_titulo . ' - Indice';
+        $this->_view->items = $usuarios;
+        $this->_view->titulo = $this->_titulo . ' - Usuarios';
+        $this->_view->tituloHTML = 'Usuarios';
         $this->_view->renderizar('index');
     }
 

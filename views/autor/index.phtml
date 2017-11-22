@@ -1,0 +1,17 @@
+
+<h2><?php echo $this->tituloHTML;?></h2>
+
+
+<table >
+    <?php foreach ($this->autores as $autor):?>
+    <tr>
+        <td><?php echo $autor['nombre'];?></td>
+        <td><?php echo $autor['total'];?></td>
+    </tr>
+    <?php endforeach;?>
+</table>
+<hr>
+<pre>
+    <?php debug($this->autores);?>
+    <?php // print_r($this->autor[0]);?>
+</pre>

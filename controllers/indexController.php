@@ -1,6 +1,7 @@
 <?php
 
 class indexController extends Controller {
+    private $_prueba = 'usuario';
 
     public function __construct() {
         parent::__construct();
@@ -8,10 +9,13 @@ class indexController extends Controller {
 
     public function index() {
 //        debug_fn(__METHOD__, [$url]);
-        $usuario = $this->loadModel('usuario');
+        $usuario = $this->loadModel($this->_prueba);
 //        debug($usuario, 'UUU');
 //        debug($usuario->getAll(), 'usuario');
-        $this->_view->usuarios = $usuario->getAll();
+//        $this->_view->usuarios = $usuario->getAllPaginated();
+        $id = rand(1,$usuario->getCount($this->_prueba));
+        debug($id, 'random ID');
+        $this->_view->usuarios = $usuario->getById($id);
         $this->_view->titulo = 'Portada';
         $this->_view->renderizar('index');
     }

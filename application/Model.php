@@ -51,7 +51,7 @@ class Model {
      */
     public function getCount($table) {
         $this->_log->write(__METHOD__ . ' - table => ' . $table);
-        $table = $this->_getTableName($table);
+        $table = $this->getTableName($table);
 
         $sql = "SELECT COUNT(*) FROM $table";
         $this->_log->write($sql);
@@ -79,7 +79,7 @@ class Model {
                 . ' - tabla => ' . $table
                 . ', campos: ' . array_to_str($campos));
 
-        $table = $this->_getTableName($table);
+        $table = $this->getTableName($table);
 
         if (count($campos)) {
             $listaCampos = 'id, ';
@@ -88,18 +88,18 @@ class Model {
             $listaCampos = '*';
         }
 
-        $sql = "SELECT " . $listaCampos . "FROM $table ORDER BY id";
+        $sql = "SELECT " . $listaCampos . " FROM $table ORDER BY id";
         $this->_log->write($sql);
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getAllPaginated(String $table, array $campos = array(), int $i, int $u) {
+    public function getAllPaginated(String $table, array $campos = array(), int $first_record, int $total_records) {
         $this->_log->write(__METHOD__
                 . ' - tabla => ' . $table
                 . ', campos: ' . array_To_str($campos));
 
-        $table = $this->_getTableName($table);
+        $table = $this->getTableName($table);
 
         if (count($campos)) {
             $listaCampos = 'id, ';
@@ -108,7 +108,7 @@ class Model {
             $listaCampos = '*';
         }
 
-        $sql = "SELECT " . $listaCampos . "FROM $table ORDER BY id LIMIT $i, $u";
+        $sql = "SELECT " . $listaCampos . " FROM $table ORDER BY id LIMIT $first_record, $total_records";
         $this->_log->write($sql);
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
@@ -119,7 +119,7 @@ class Model {
                 . ' - tabla => ' . $table
                 . ', index: ' . $id);
 
-        $table = $this->_getTableName($table);
+        $table = $this->getTableName($table);
 
         $id = (int) $id;
         $sql = "SELECT * FROM $table WHERE id=$id ";
@@ -323,7 +323,7 @@ class Model {
         }
     }
 
-    private function _getTableName($table) {
+    protected function getTableName($table) {
         $len_prefix = strlen(TABLES_PREFIX);
 
         if (substr($table, 0, $len_prefix) == TABLES_PREFIX) {
