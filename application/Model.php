@@ -300,7 +300,7 @@ class Model {
         $campos[':id'] = $id;
 
         //@TODO poner nombres campos como constantes
-        $sql = "UPDATE $table SET ultimo_acceso=now() WHERE id = :id";
+        $sql = "UPDATE $table SET fecha_acceso=now() WHERE id = :id";
         $this->_log->write($sql);
 
         $this->_db->prepare($sql)
