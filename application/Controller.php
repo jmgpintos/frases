@@ -18,7 +18,7 @@ abstract class Controller {
         if (is_readable($rutaModelo)) {
             require_once $rutaModelo;
             $modelo = new $modelo;
-//        debug($rutaModelo, 'rutaModelo');
+            debug($rutaModelo, 'rutaModelo');
             return $modelo;
         } else {
             throw new Exception('Error de modelo: ' . $rutaModelo);

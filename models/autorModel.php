@@ -30,7 +30,11 @@ class AutorModel extends Model {
     }
 
     public function getById(int $id) {
-        $autor = parent::getById($this->_table, $id)[0];
+        $autor = parent::getById($this->_table, $id);
+        if (count($autor) != 1) {
+            return null;
+        }
+        $autor = $autor[0];
         $frases = $this->_get_frases_from_autor($autor['id']);
         $autor['total_frases'] = count($frases);
         $autor['frases'] = $frases;

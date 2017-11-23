@@ -15,9 +15,8 @@ class citaController extends Controller {
         $cita = $this->_model;
 
         $frases = $cita->getAllPaginated();
-
-        $this->_view->frases = $frases;
-        $this->_view->titulo = $this->_titulo . ' - Indice';
+        $this->_view->assign('frases',  $frases);
+        $this->_view->assign('titulo', $this->_titulo . ' - Indice');
         $this->_view->renderizar('index');
     }
 
@@ -26,8 +25,8 @@ class citaController extends Controller {
 
         $frase = $cita->getRandom();
 
-        $this->_view->frase = $frase;
-        $this->_view->titulo = $this->_titulo . ' - Cita aleatoria';
+        $this->_view->assign('frase', $frase);
+        $this->_view->assign('titulo', $this->_titulo . ' - Cita aleatoria');
         $this->_view->renderizar('random');
     }
     

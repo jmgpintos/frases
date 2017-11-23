@@ -14,9 +14,9 @@ class indexController extends Controller {
 //        debug($usuario->getAll(), 'usuario');
 //        $this->_view->usuarios = $usuario->getAllPaginated();
         $id = rand(1,$usuario->getCount($this->_prueba));
+        $this->_view->assign('usuarios', $usuario->getById($id));
+        $this->_view->assign('titulo', 'Portada');
         debug($id, 'random ID');
-        $this->_view->usuarios = $usuario->getById($id);
-        $this->_view->titulo = 'Portada';
         $this->_view->renderizar('index');
     }
 

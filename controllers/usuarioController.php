@@ -15,25 +15,12 @@ class usuarioController extends Controller {
         $model = $this->_model;
 
         $usuarios = $model->getAllPaginated();
+//        debug($usuarios);
 
-        $this->_view->items = $usuarios;
-        $this->_view->titulo = $this->_titulo . ' - Usuarios';
-        $this->_view->tituloHTML = 'Usuarios';
+        $this->_view->assign('usuarios', $usuarios);
+        $this->_view->assign('titulo', $this->_titulo . ' - Usuarios');
+        $this->_view->assign('tituloHTML', 'Usuarios');
         $this->_view->renderizar('index');
-    }
-
-    public function random() {
-        $cita = $this->_model;
-
-        $frase = $cita->getRandom();
-
-        $this->_view->frase = $frase;
-        $this->_view->titulo = $this->_titulo . ' - Cita aleatoria';
-        $this->_view->renderizar('random');
-    }
-    
-    public function quote_of_the_day() {
-        
     }
 
 }

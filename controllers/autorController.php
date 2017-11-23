@@ -12,15 +12,26 @@ class autorController extends Controller {
 
     public function index() {
 //        debug_fn(__METHOD__);
-        $autor = $this->_model;
+        $autor_model = $this->_model;
 
-        $autores = $autor->getAllPaginated();
+        $autores = $autor_model->getAllPaginated();
 
-        $this->_view->autores = $autores;
-        $this->_view->titulo = $this->_titulo . ' - Indice';
-        $this->_view->tituloHTML = 'Autores';
+        $this->_view->assign('autores', $autores);
+        $this->_view->assign('titulo', $this->_titulo . ' - Indice');
+        $this->_view->assign('tituloHTML', 'Autores');
         $this->_view->renderizar('index');
     }
 
+    public function view($id) {
+        $autor_model = $this->_model;
+        $autor = $autor_model->getBYId($id);
+        if (!$autor) {
+            $this->_view->assign('_error',"No existe ningun autor con ese id ($id)");
+        } else {
+            $this->_view->assign('autor',$autor);
+//            debug($autor);
+        }
+        $this->_view->renderizar('view');
+    }
 
 }

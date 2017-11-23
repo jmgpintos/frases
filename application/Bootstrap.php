@@ -8,14 +8,15 @@ class Bootstrap {
     public static function run(Request $peticion) {
         $controller = $peticion->getControlador() . 'Controller';
         $rutaControlador = ROOT . 'controllers' . DS . $controller . '.php';
-//        debug($rutaControlador, ' rutaControlador');
+        debug($rutaControlador, ' rutaControlador');
 
         $metodo = $peticion->getMetodo();
+        debug($metodo, 'Metodo');
         $args = $peticion->getArgs();
 
         if (is_readable($rutaControlador)) {
-//            debug($rutaControlador);
-//            debug($controller);
+//            debug($rutaControlador,'rutaControlador');
+//            debug($controller,Controller);
             require_once $rutaControlador;
 
             $controller = new $controller;
@@ -41,7 +42,6 @@ class Bootstrap {
         } else {
             call_user_func(array($controller, $metodo));
         }
-        
     }
 
 }

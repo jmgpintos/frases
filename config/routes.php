@@ -7,7 +7,7 @@ define('BASE_URL', 'http://localhost/frases/');
 
 define('CLASS_DIRS', array(
                         'application/',
-                        'libs/helpers',
+                        'libs/',
                         'controllers/',
                         'models/',
                         'views/'
