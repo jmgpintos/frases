@@ -3,6 +3,7 @@
 abstract class Controller {
 
     protected $_view;
+    protected $_titulo_app = 'FRASES';
 
     public function __construct() {
         $this->_view = new View(new Request());

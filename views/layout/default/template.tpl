@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>{$titulo|default:"SIN TITULO"}</title>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" >
         <link href="{$_layoutParams.ruta_css}estilos.css" rel="stylesheet" type="text/css" />
         <script src="{$_layoutParams.root}public/js/jquery.js" type="text/javascript"></script>
 
