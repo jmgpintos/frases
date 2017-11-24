@@ -89,7 +89,7 @@ class Model {
         }
 
         $sql = "SELECT " . $listaCampos . " FROM $table ORDER BY id";
-        $this->_log->write($sql);
+        $this->_log->write(__METHOD__ . ': ' . $sql);
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -109,7 +109,7 @@ class Model {
         }
 
         $sql = "SELECT " . $listaCampos . " FROM $table ORDER BY id LIMIT $first_record, $total_records";
-        $this->_log->write($sql);
+        $this->_log->write(__METHOD__ . ': ' . $sql);
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -123,7 +123,7 @@ class Model {
 
         $id = (int) $id;
         $sql = "SELECT * FROM $table WHERE id=$id ";
-        $this->_log->write($sql);
+        $this->_log->write(__METHOD__ . ': ' . $sql);
 
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
@@ -160,7 +160,7 @@ class Model {
         }
 
         $sql = "INSERT INTO $table (" . rtrim($str_columnas, ', ') . ") VALUES(" . rtrim($str_campos, ', ') . ")"; //el primer campo (null) es el id
-        $this->_log->write($sql);
+        $this->_log->write(__METHOD__ . ' ' . $sql, LOG_INFO);
         //ejecutar consulta
         $this->_db->prepare($sql)
                 ->execute($campos);
@@ -169,7 +169,7 @@ class Model {
 
         $this->_log->write(__METHOD__
                 . ' registro insertado - tabla =>' . $table
-                . ', campos: ' . array_to_str($campos));
+                . ', campos: ' . array_to_str($campos), LOG_INFO);
 
         return $this->_lastID;
     }
@@ -212,8 +212,8 @@ class Model {
         $this->_log->write(__METHOD__
                 . ' registro editado - tabla =>' . $table
                 . ', index => ' . $index
-                . ', campos: ' . array_to_str($campos));
-        $this->_log->write($sql);
+                . ', campos: ' . array_to_str($campos), LOG_INFO);
+        $this->_log->write(__METHOD__ . ' ' . $sql, LOG_INFO);
 
         $stmt = $this->_db->prepare($sql);
         return $stmt->execute($campos);
@@ -230,7 +230,7 @@ class Model {
     public function eliminarRegistro($table, $index) {
         $this->_log->write(__METHOD__
                 . ' - tabla =>' . $table
-                . ', index => ' . $index
+                . ', index => ' . $index, LOG_INFO
         );
 
         $table = $this->getTableName($table);
@@ -242,7 +242,7 @@ class Model {
 
         //Borrar registro
         $sql = "DELETE FROM $table WHERE id=$id";
-        $this->_log->write($sql);
+        $this->_log->write(__METHOD__ . ' ' . $sql, LOG_INFO);
 
         if ($this->_db->query($sql)) {
             return $reg_borrado;

@@ -22,7 +22,6 @@
 
             <div id="menu_top">
                 <ul>
-
                     {if isset($_layoutParams.menu)}
                         {foreach item=it from=$_layoutParams.menu}
 
@@ -37,10 +36,9 @@
                             </li>
                         {/foreach}
                     {/if}
-
-
                 </ul>
             </div>
+                
             <div id='content'>
                 <noscript>Para el correcto funcionamiento del sitio debe activar javascritp</noscript>
                 {if isset($_error)}

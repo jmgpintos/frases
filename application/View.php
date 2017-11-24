@@ -73,9 +73,24 @@ class View extends Smarty {
                 'enlace' => BASE_URL
             ),
             array(
-                'id' => 'hola',
-                'titulo' => 'Hola',
-                'enlace' => BASE_URL . 'hola'
+                'id' => 'citas',
+                'titulo' => 'Citas',
+                'enlace' => BASE_URL . 'cita'
+            ),
+            array(
+                'id' => 'categorias',
+                'titulo' => 'Categor&iacute;as',
+                'enlace' => BASE_URL . 'categoria'
+            ),
+            array(
+                'id' => 'autores',
+                'titulo' => 'Autores',
+                'enlace' => BASE_URL . 'autor'
+            ),
+            array(
+                'id' => 'usuarios',
+                'titulo' => 'Usuarios',
+                'enlace' => BASE_URL . 'usuario'
             )
         );
 //        debug($menu, 'menu');

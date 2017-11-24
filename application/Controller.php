@@ -4,9 +4,11 @@ abstract class Controller {
 
     protected $_view;
     protected $_titulo_app = 'FRASES';
+    protected $_log;
 
     public function __construct() {
         $this->_view = new View(new Request());
+        $this->_log = new Log();
     }
 
     abstract public function index();

@@ -32,6 +32,7 @@ class autorController extends Controller {
         
         if (!$autor) {
             $this->_view->assign('_error', "No existe ningun autor con ese id ($id)");
+            $this->_log->write(__METHOD__ .': '. "No existe ningun autor con ese id ($id)", LOG_WARNING);
         } else {
             $this->_view->assign('titulo', $this->_titulo_app . ' - ' . $autor['nombre']);
             $this->_view->assign('autor', $autor);

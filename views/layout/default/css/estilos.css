@@ -2,3 +2,12 @@ body{
     color:rgb(127,0,65);
     background-color: rgba(127,0,65,0.2);
 }
+
+blockquote{
+    font-style: oblique;
+    font-size: 150%;
+    font-family: sans-serif;
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}

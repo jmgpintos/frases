@@ -1,10 +1,11 @@
 
-<h2>{$titulo}</h2>
-Hola desde vista smarty
-<pre>
-    {php}debug($usuarios);{/php}
-</pre>
-{$usuarios}
-{foreach item=it from=usuarios}
-    {$it}
+<h2>{$frase.frase}</h2>
+Autor: {$frase.autor.nombre}<br/>
+Categoria: {$frase.categoria.nombre}<br/>
+Etiquetas: 
+{foreach item=it from=$frase.etiquetas}
+    {$it.texto}, 
 {/foreach}
+<blockquote>
+    {$frase.frase}
+</blockquote>
