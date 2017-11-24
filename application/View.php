@@ -22,7 +22,6 @@ class View extends Smarty {
 
         $menu = $this->_getMenu();
 
-
         $_params = $this->_getLayoutParams($menu, $item, $this->_getJS());
 
         $rutaView = ROOT . 'views' . DS . $this->_controlador . DS . $vista . '.tpl';
@@ -43,7 +42,7 @@ class View extends Smarty {
             for ($i = 0; $i < count($js); $i++) {
                 $this->_js[] = BASE_URL . 'views' . $this->_controlador . '/js/' . $js[$i] . '.js';
             }
-        }else{
+        } else {
             throw new Exception('Error de js');
         }
     }
@@ -76,34 +75,27 @@ class View extends Smarty {
     }
 
     private function _getMenu() {
-        $menu = array(
-            array(
-                'id' => 'inicio',
-                'titulo' => 'inicio',
-                'enlace' => BASE_URL
-            ),
-            array(
-                'id' => 'citas',
-                'titulo' => 'Citas',
-                'enlace' => BASE_URL . 'cita'
-            ),
-            array(
-                'id' => 'categorias',
-                'titulo' => 'Categor&iacute;as',
-                'enlace' => BASE_URL . 'categoria'
-            ),
-            array(
-                'id' => 'autores',
-                'titulo' => 'Autores',
-                'enlace' => BASE_URL . 'autor'
-            ),
-            array(
-                'id' => 'usuarios',
-                'titulo' => 'Usuarios',
-                'enlace' => BASE_URL . 'usuario'
-            )
-        );
+        $menu = [
+            ['id' => 'inicio', 'titulo' => 'inicio', 'enlace' => BASE_URL],
+            ['id' => 'citas', 'titulo' => 'Citas', 'enlace' => BASE_URL . 'cita'],
+            ['id' => 'categorias', 'titulo' => 'Categor&iacute;as', 'enlace' => BASE_URL . 'categoria'],
+            ['id' => 'autores', 'titulo' => 'Autores', 'enlace' => BASE_URL . 'autor'],
+            ['id' => 'usuarios', 'titulo' => 'Usuarios', 'enlace' => BASE_URL . 'usuario']
+        ];
+
+        $menu = $this->_getMenuAutenticado($menu);
+
 //        debug($menu, 'menu');
+        return $menu;
+    }
+
+    public function _getMenuAutenticado($menu) {
+        if (Session::estaAutenticado()) {
+            $menu[] = ['id' => 'login', 'titulo' => 'Cerrar Sesi&oacute;n', 'enlace' => BASE_URL . 'login/cerrar'];
+        } else {
+            $menu[] = ['id' => 'login', 'titulo' => 'Iniciar Sesi&oacute;n', 'enlace' => BASE_URL . 'login'];
+        }
+
         return $menu;
     }
 

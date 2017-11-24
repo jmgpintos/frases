@@ -46,7 +46,8 @@ abstract class Controller {
      * @param type $clave
      */
     protected function getInt($clave) {
-        if (isset($_POST[$clave]) && !empty($_POST['clave'])) {
+        if (isset($_POST[$clave]) && !empty($_POST[$clave])) {
+            debug('TEST');
             $_POST['clave'] = filter_input(INPUT_POST, $clave, FILTER_VALIDATE_INT);
             return $_POST['clave'];
         }
@@ -63,20 +64,43 @@ abstract class Controller {
             exit;
         }
     }
-    
+
     /**
      * Filtra los numeros que vienen por GET
      * @param type $int
      */
     protected function filtrarInt($int) {
         $int = (int) $int;
-        if(is_int($int)){
+        if (is_int($int)) {
             return $int;
-        }
-        else{
+        } else {
             return 0;
         }
-        
+    }
+
+    protected function getPostParam($clave) {
+        if (isset($_POST[$clave])) {
+            return $_POST[$clave];
+        }
+    }
+
+    protected function getSql($clave) {
+        if (isset($_POST[$clave]) && !empty($_POST[$clave])) {
+            $_POST[$clave] = strip_tags($_POST[$clave]);
+
+//            if (!get_magic_quotes_gpc()) {
+//                $_POST[$clave] = mysqli_escape_string($_POST[$clave]);
+//            }
+
+            return trim($_POST[$clave]);
+        }
+    }
+
+    protected function getAlphaNum($clave) {
+        if (isset($_POST[$clave]) && !empty($_POST[$clave])) {
+            $_POST[$clave] = (string) preg_replace('/[^A-Z0-9_]/i', '', $_POST[$clave]);
+            return trim($_POST[$clave]);
+        }
     }
 
 }
