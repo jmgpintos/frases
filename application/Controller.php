@@ -28,4 +28,55 @@ abstract class Controller {
         }
     }
 
+    /**
+     * Filtra el texto que viene por POST
+     * @param type $clave
+     */
+    protected function getTexto($clave) {
+        if (isset($_POST[$clave]) && !empty($_POST['clave'])) {
+            $_POST['clave'] = htmlspecialchars($_POST['clave'], ENT_QUOTES);
+            return $_POST['clave'];
+        }
+
+        return '';
+    }
+
+    /**
+     * Filtra los numeros que vienen por POST
+     * @param type $clave
+     */
+    protected function getInt($clave) {
+        if (isset($_POST[$clave]) && !empty($_POST['clave'])) {
+            $_POST['clave'] = filter_input(INPUT_POST, $clave, FILTER_VALIDATE_INT);
+            return $_POST['clave'];
+        }
+
+        return 0;
+    }
+
+    protected function redireccionar($ruta = false) {
+        if ($ruta) {
+            header('location:' . BASE_URL . $ruta);
+            exit;
+        } else {
+            header('location:' . BASE_URL);
+            exit;
+        }
+    }
+    
+    /**
+     * Filtra los numeros que vienen por GET
+     * @param type $int
+     */
+    protected function filtrarInt($int) {
+        $int = (int) $int;
+        if(is_int($int)){
+            return $int;
+        }
+        else{
+            return 0;
+        }
+        
+    }
+
 }

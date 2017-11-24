@@ -20,7 +20,7 @@ define('DEFAULT_CONTROLLER', 'index');
 define('DEFAULT_METHOD', 'index');
 define('DEFAULT_LAYOUT', 'default');
 
-define('SESSION_TIME', 15);
+define('SESSION_TIME', 1); //tiempo de duracion de la sesion (minutos)
 define('HASH_KEY', '573ca1f7efa62');
 
 //Los niveles de LOG ya están definidos en el código fuente de PHP

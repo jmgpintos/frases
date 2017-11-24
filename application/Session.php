@@ -25,23 +25,29 @@ class Session {
     public static function destroy($clave = false) {
         if ($clave) {
             if (is_array($clave)) {
-                $this->_unset_array($clave);
+                self::_unset_array($clave);
             } else {
-                $this->_unset($clave);
+                self::_unset($clave);
             }
         } else {
             session_destroy();
         }
     }
 
+    /**
+     * Borra las variables de sesion cuyosnombres se pasan en el array $clave
+     * @param array $clave
+     */
     private function _unset_array($clave) {
         for ($i = 0; $i < count($clave); $i++) {
-            if (isset($_SESSION[$clave[$i]])) {
-                unset($_SESSION[$clave[$i]]);
-            }
+            self::_unset($clave[$i]);
         }
     }
 
+    /**
+     * Borra la variable de sesion de nombre $clave
+     * @param string $clave
+     */
     private function _unset($clave) {
         if (isset($_SESSION[$clave])) {
             unset($_SESSION[$clave]);
@@ -92,8 +98,17 @@ class Session {
      * @return boolean
      */
     public static function estaAutenticado() {
+//        debug(__METHOD__);
         if (isset($_SESSION['autenticado'])) {
             return true;
+        }
+
+        return false;
+    }
+
+    public static function getCurrentUserLevel() {
+        if (isset($_SESSION['level'])) {
+            return $_SESSION['level'];
         }
 
         return false;
@@ -169,9 +184,10 @@ class Session {
     /**
      * Controla el acceso a los métodos según perfil de usuario
      * 
-     * @param string $level Nivel de usuario mínimo requerido para tener permiso
+     * @param int $level Nivel de usuario mínimo requerido para tener permiso
      */
     public static function acceso($level) {
+//        debug_fn(__METHOD__ , [$level]);
         if (!Session::estaAutenticado()) {
             header('location:' . BASE_URL . 'error/access/5050');
             exit;
@@ -180,7 +196,8 @@ class Session {
         Session::tiempo();
 
         //Comparamos el nivel de acceso requerido con el nivel del usuario
-        if (Session::getLevel($level) > Session::getLevel(Session::get('level'))) {
+//        if (Session::getLevel($level) > Session::getLevel(Session::get('level'))) {
+        if (Session::getLevel($level) > Session::getCurrentUserLevel()) {
             header('location:' . BASE_URL . 'error/access/5050');
             exit;
         }
@@ -188,7 +205,7 @@ class Session {
 
     /**
      * Para restringir código en las vistas
-     * @param type $level Nivel de usuario mínimo requerido para tener permiso
+     * @param int $level Nivel de usuario mínimo requerido para tener permiso
      * 
      * @return boolean
      */
@@ -198,7 +215,8 @@ class Session {
         }
 
         //Comparamos el nivel de acceso requerido con el nivel del usuario
-        if (Session::getLevel($level) > Session::getLevel(Session::get('level'))) {
+//        if (Session::getLevel($level) > Session::getLevel(Session::get('level'))) {
+        if (Session::getLevel($level) > Session::getCurrentUserLevel()) {
             return false;
         }
         return true;
@@ -211,9 +229,9 @@ class Session {
      * @throws Exception
      */
     public static function getLevel($level) {
-        $role['admin'] = USUARIO_ROL_ADMIN;
-        $role['editor'] = USUARIO_ROL_EDITOR;
-        $role['usuario'] = USUARIO_ROL_USUARIO;
+        $role[USUARIO_ROL_ADMIN] = USUARIO_ROL_ADMIN;
+        $role[USUARIO_ROL_EDITOR] = USUARIO_ROL_EDITOR;
+//        $role['usuario'] = USUARIO_ROL_USUARIO;
 
         if (!array_key_exists($level, $role)) {
             throw new Exception('Error de acceso');
@@ -227,6 +245,7 @@ class Session {
      * @param array $level
      * @param type $noAdmin
      */
+    /*
     public static function accesoEstricto(array $level, $noAdmin = false) {
         if (!Session::estaAutenticado()) {
             header('location:' . BASE_URL . 'error/access/5050');
@@ -250,7 +269,9 @@ class Session {
 
         header('location:' . BASE_URL . 'error/access/5050');
     }
-
+     * 
+     */
+/*
     public static function accesoViewEstricto(array $level, $noAdmin = false) {
         if (!Session::estaAutenticado()) {
             return false;
@@ -271,6 +292,8 @@ class Session {
 
         return false;
     }
+ * 
+ */
 
     /* FIN METODOS PARA CONTROLAR ACCESO */
 
@@ -282,20 +305,20 @@ class Session {
      * @throws Exception
      */
     public static function tiempo() {
-        debug("TIEMPO");
+//        debug("TIEMPO");
         if (self::estaAutenticado()) {
             if (!Session::get('tiempo') || !defined('SESSION_TIME')) {
                 throw new Exception('No se ha definido el tiempo de sesión');
             }
 
-            if (SESSION_TIME == 0) {
+            if (SESSION_TIME == 0) {//Si SESSION_TIME==0 la sesion no caduca
                 return;
             }
 
-            if (time() - Session::get('tiempo') > (SESSION_TIME * 60)) {
+            if (time() - Session::get('tiempo') > (SESSION_TIME * 60)) {//Si la sesion ha caducado, sa envia a la pagina de error
                 Session::destroy();
                 header('location:' . BASE_URL . 'error/access/8080');
-            } else {
+            } else {//Si la sesion noha caducado, se actualiza la variable tiempo
                 Session::set('tiempo', time());
             }
         }

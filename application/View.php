@@ -27,7 +27,7 @@ class View extends Smarty {
 
         $rutaView = ROOT . 'views' . DS . $this->_controlador . DS . $vista . '.tpl';
         debug($rutaView, 'rutaView');
-        
+
         if (is_readable($rutaView)) {
             $this->assign('_contenido', $rutaView);
         } else {
@@ -36,6 +36,16 @@ class View extends Smarty {
 
         $this->assign('_layoutParams', $_params);
         $this->display('template.tpl');
+    }
+
+    public function setJs(array $js) {
+        if (is_array($js) && count($js)) {
+            for ($i = 0; $i < count($js); $i++) {
+                $this->_js[] = BASE_URL . 'views' . $this->_controlador . '/js/' . $js[$i] . '.js';
+            }
+        }else{
+            throw new Exception('Error de js');
+        }
     }
 
     private function _getJS() {

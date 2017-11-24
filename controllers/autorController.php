@@ -27,6 +27,7 @@ class autorController extends Controller {
     }
 
     public function view($id = 0) {
+//        Session::acceso(USUARIO_ROL_EDITOR);//prueba acceso
         $autor_model = $this->_model;
         $autor = $autor_model->getBYId($id);
         
