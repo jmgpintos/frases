@@ -10,7 +10,7 @@ require_once 'libs/helpers/autoloader.php';
 require_once 'libs/helpers/helpers.php';
 
 //debug($_GET['url'], 'url');
-
+//debug(Hash::getHash('sha1', 'admin', HASH_KEY));exit;
 Session::init();
 try {
     Bootstrap::run(new Request());

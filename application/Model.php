@@ -368,7 +368,7 @@ class Model {
         $table = $this->getTableName($table);
 
         $rs = $this->_db->query("SELECT * FROM $table LIMIT 0");
-        $this->_log->write($sql);
+
         for ($i = 0; $i < $rs->columnCount(); $i++) {
             $col = $rs->getColumnMeta($i);
             $columns[] = $col['name'];

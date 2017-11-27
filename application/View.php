@@ -92,6 +92,9 @@ class View extends Smarty {
     public function _getMenuAutenticado($menu) {
         if (Session::estaAutenticado()) {
             $menu[] = ['id' => 'login', 'titulo' => 'Cerrar Sesi&oacute;n', 'enlace' => BASE_URL . 'login/cerrar'];
+            if (Session::esAdmin()) {
+                $menu[] = ['id' => 'registro', 'titulo' => 'Registro', 'enlace' => BASE_URL . 'registro'];
+            }
         } else {
             $menu[] = ['id' => 'login', 'titulo' => 'Iniciar Sesi&oacute;n', 'enlace' => BASE_URL . 'login'];
         }

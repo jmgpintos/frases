@@ -5,6 +5,8 @@ abstract class Controller {
     protected $_view;
     protected $_titulo_app = 'FRASES';
     protected $_log;
+    protected $_error;
+    protected $_message;
 
     public function __construct() {
         $this->_view = new View(new Request());
@@ -101,6 +103,23 @@ abstract class Controller {
             $_POST[$clave] = (string) preg_replace('/[^A-Z0-9_]/i', '', $_POST[$clave]);
             return trim($_POST[$clave]);
         }
+    }
+
+    public function validarEmail($email) {
+        debug_fn(__METHOD__, [$email]);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function ponerError($err) {
+        $this->_view->assign('_error', $err);
+    }
+
+    protected function ponerMensaje($msg) {
+        $this->_view->assign('_mensaje', $msg);
     }
 
 }

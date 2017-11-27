@@ -9,7 +9,7 @@ class loginModel extends Model {
     public function getUsuario($usuario, $password) {
         $sql = "SELECT * FROM usuario "
                 . "WHERE usuario = '$usuario' "
-                . "AND password = md5('$password')";
+                . "AND password = '" . Hash::getHash('sha1', $password, HASH_KEY) . "'";
         $this->_log->write($sql);
         $datos = $this->_db->query($sql);
         return $datos->fetch(PDO::FETCH_ASSOC);
