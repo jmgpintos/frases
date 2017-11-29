@@ -178,23 +178,18 @@ class Model {
      * Actualiza un registro
      * 
      * @param string $table Nombre de la tabla con o sin prefijo (TABLES_PREFIX)
-     * @param int $index valor del campo 'id' del registro a editar
+     * @param int $id valor del campo 'id' del registro a editar
      * @param array $campos  lista de campos y valores del tipo (':nombre_campo' => 'valor_campo')
      * @return array
      */
-    public function editarRegistro($table, $index, array $campos) {
+    public function editarRegistro($table, $id, array $campos) {
+//        debug_fn(__METHOD__, ['table' => $table, 'id' => $id, 'campos' => $campos]);
+//        debug($campos);
+//        debug(count($campos));
         $table = $this->getTableName($table);
+        $campos = trim_array_keys($campos);
 
-        $id = (int) $index;
-
-        //Agregar modificador y fecha_modificacion si la tabla tiene esos campos.
-        //@TODO poner nombres campos como constantes
-        if (in_array('id_usuario_modificacion', $this->_getFields($table))) {
-            $campos[':id_usuario_modificacion'] = Session::getId();
-        }
-        if (in_array('fecha_modificacion', $this->_getFields($table))) {
-            $campos[':fecha_modificacion'] = FechaHora::Hoy();
-        }
+        $id = (int) $id;
 
         //construir SQL
         $tmp_campos = '';
@@ -205,17 +200,31 @@ class Model {
 
         $srt_campos = rtrim($tmp_campos, ', ');
 
-        $campos[':id'] = $id; //Añadir campo id a lista campos para execute
+        $campos['id'] = $id; //Añadir campo id a lista campos para execute
 
         $sql = "UPDATE $table SET " . $srt_campos . " WHERE id = :id";
 
         $this->_log->write(__METHOD__
                 . ' registro editado - tabla =>' . $table
-                . ', index => ' . $index
+                . ', id => ' . $id
                 . ', campos: ' . array_to_str($campos), LOG_INFO);
         $this->_log->write(__METHOD__ . ' ' . $sql, LOG_INFO);
 
+        debug($sql, 'SQL');
+
         $stmt = $this->_db->prepare($sql);
+//        debug($campos, 'campos');
+//        debug($campos['id'], 'id');
+//        debug($campos['estado'], 'estado');
+//        $campos = [
+//            "estado" => 1,
+//            "id" => $id
+//        ];
+//        debug($campos, 'campos');
+//        debug($campos['id'], 'id');
+//        debug($campos['estado'], 'estado');
+//        debug(count($campos), 'count(campos)');
+
         return $stmt->execute($campos);
     }
 

@@ -8,10 +8,10 @@ class Bootstrap {
     public static function run(Request $peticion) {
         $controller = $peticion->getControlador() . 'Controller';
         $rutaControlador = ROOT . 'controllers' . DS . $controller . '.php';
-        debug($rutaControlador, ' rutaControlador');
+//        debug($rutaControlador, ' rutaControlador');
 
         $metodo = $peticion->getMetodo();
-        debug($metodo, 'Metodo');
+//        debug($metodo, 'Metodo');
         $args = $peticion->getArgs();
 
         if (is_readable($rutaControlador)) {

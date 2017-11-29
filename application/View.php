@@ -25,7 +25,7 @@ class View extends Smarty {
         $_params = $this->_getLayoutParams($menu, $item, $this->_getJS());
 
         $rutaView = ROOT . 'views' . DS . $this->_controlador . DS . $vista . '.tpl';
-        debug($rutaView, 'rutaView');
+//        debug($rutaView, 'rutaView');
 
         if (is_readable($rutaView)) {
             $this->assign('_contenido', $rutaView);

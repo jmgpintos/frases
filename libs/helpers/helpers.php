@@ -5,8 +5,7 @@
  */
 if (!function_exists('info_sesion')) {
 
-    function info_sesion($sep = false)
-    {
+    function info_sesion($sep = false) {
         if (!$sep) {
             $sep = "\n";
         }
@@ -20,8 +19,7 @@ if (!function_exists('info_sesion')) {
 
 if (!function_exists('info_array')) {
 
-    function info_array(array $arr, $sep = ' | ', $esArray = false)
-    {
+    function info_array(array $arr, $sep = ' | ', $esArray = false) {
         $s = $l = $r = "";
         foreach ($arr as $clave => $v) {
             $tipo = gettype($v);
@@ -55,8 +53,7 @@ if (!function_exists('info_array')) {
 
 if (!function_exists('vardump')) {
 
-    function vardump($msg = null)
-    {
+    function vardump($msg = null) {
         if (DEBUG) {
             $args = func_get_args();
             if (is_string($msg)) {
@@ -77,56 +74,55 @@ if (!function_exists('vardump')) {
 
 if (!function_exists('vardumpy')) {
 
-    function vardumpy($msg = null)
-    {
+    function vardumpy($msg = null) {
         vardump($msg);
         exit;
     }
 
 }
 /*
-if (!function_exists('put')) {
+  if (!function_exists('put')) {
 
-    function put($text = 'xxx')
-    {
-        if (DEBUG) {
-            echo "<pre>$text</pre>\n";
-        }
-    }
+  function put($text = 'xxx')
+  {
+  if (DEBUG) {
+  echo "<pre>$text</pre>\n";
+  }
+  }
 
-}
+  }
 
-if (!function_exists('puty')) {
+  if (!function_exists('puty')) {
 
-    function puty($text)
-    {
-        put($text);
-        exit;
-    }
+  function puty($text)
+  {
+  put($text);
+  exit;
+  }
 
-}
+  }
 
-if (!function_exists('put_e')) {
+  if (!function_exists('put_e')) {
 
-    function put_e($msg)
-    {
-        $msg = escapeltgt($msg);
-        echo "<pre>$msg</pre>";
-    }
+  function put_e($msg)
+  {
+  $msg = escapeltgt($msg);
+  echo "<pre>$msg</pre>";
+  }
 
-}
+  }
 
-if (!function_exists('vardump_e')) {
+  if (!function_exists('vardump_e')) {
 
-    function vardump_e($value, $msg = null)
-    {
-        if ($msg)
-            $msg = "<b>$msg</b>\n";
-        echo "<pre>$msg" . (escapeltgt(print_r($value, true))) . "</pre>\n\n";
-    }
+  function vardump_e($value, $msg = null)
+  {
+  if ($msg)
+  $msg = "<b>$msg</b>\n";
+  echo "<pre>$msg" . (escapeltgt(print_r($value, true))) . "</pre>\n\n";
+  }
 
-}
-*/
+  }
+ */
 /**
  * stripSlashesDeep
  * recursively do stripslahes() on an array or string.
@@ -136,8 +132,7 @@ if (!function_exists('vardump_e')) {
  */
 if (!function_exists('stripSlashesDeep')) {
 
-    function stripSlashesDeep($value)
-    {
+    function stripSlashesDeep($value) {
         $value = is_array($value) ? array_map('stripSlashesDeep', $value) : stripslashes($value);
         return $value;
     }
@@ -150,8 +145,7 @@ if (!function_exists('stripSlashesDeep')) {
 
 if (!function_exists('mysqlEscapeDeep')) {
 
-    function mysqlEscapeDeep($db, $value)
-    {
+    function mysqlEscapeDeep($db, $value) {
         if (is_array($value)) {
             foreach ($value as $k => $v) {
                 $val[$k] = mysqlEscapeDeep($db, $v);
@@ -168,8 +162,7 @@ if (!function_exists('mysqlEscapeDeep')) {
 
 if (!function_exists('escapeltgt')) {
 
-    function escapeltgt($value)
-    {
+    function escapeltgt($value) {
         $value = preg_replace(array("/</", "/>/"), array("&lt;", "&gt;"), $value);
         return $value;
     }
@@ -180,8 +173,7 @@ if (!function_exists('escapeltgt')) {
 
 if (!function_exists('varprint')) {
 
-    function varprint($value, $msg = null)
-    {
+    function varprint($value, $msg = null) {
         if ($msg)
             $msg = "<b>$msg</b>\n";
         echo "<pre>$msg" . (escapeltgt(print_r($value, true))) . "</pre>\n\n";
@@ -191,8 +183,7 @@ if (!function_exists('varprint')) {
 
 if (!function_exists('arrayToObjectDeep')) {
 
-    function arrayToObjectDeep($array)
-    {
+    function arrayToObjectDeep($array) {
         if (!is_array($array)) {
             return $array;
         }
@@ -216,8 +207,7 @@ if (!function_exists('arrayToObjectDeep')) {
 
 if (!function_exists('fecha_mes')) {
 
-    function fecha_mes($param = null, $sep = "/", $mes_corto = true, $hora = false)
-    {
+    function fecha_mes($param = null, $sep = "/", $mes_corto = true, $hora = false) {
         $r = 5;
         if (!isset($param)) {
             return null;
@@ -256,7 +246,7 @@ if (!function_exists('fecha_mes')) {
         $r = $fecha[2] . $sep . $meses[$fecha[1] - 1] . $sep . $fecha[0];
 
         if ($hora === true) {
-            $r.=' - ' . $hora;
+            $r .= ' - ' . $hora;
         }
 
         return $r;
@@ -266,8 +256,7 @@ if (!function_exists('fecha_mes')) {
 
 if (!function_exists('fecha_completa')) {
 
-    function fecha_completa($fecha)
-    {
+    function fecha_completa($fecha) {
         return ltrim(fecha_mes($fecha, ' de ', false), 0);
     }
 
@@ -275,8 +264,7 @@ if (!function_exists('fecha_completa')) {
 
 if (!function_exists('formato_telefono')) {
 
-    function formato_telefono($t, $sep = ' ')
-    {
+    function formato_telefono($t, $sep = ' ') {
         if (strlen($t) != 9) {
             if ($t == '0') {
                 return null;
@@ -290,16 +278,14 @@ if (!function_exists('formato_telefono')) {
 
 if (!function_exists('limpia_espacios')) {
 
-    function limpia_espacios($cadena)
-    {
+    function limpia_espacios($cadena) {
         return str_replace(' ', '', $cadena);
     }
 
 }
 if (!function_exists('limpiar')) {
 
-    function limpiar($String)
-    {
+    function limpiar($String) {
         $String = str_replace(array('á', 'à', 'â', 'ã', 'ª', 'ä'), "a", $String);
         $String = str_replace(array('Á', 'À', 'Â', 'Ã', 'Ä'), "A", $String);
         $String = str_replace(array('Í', 'Ì', 'Î', 'Ï'), "I", $String);
@@ -335,8 +321,7 @@ if (!function_exists('limpiar')) {
 
 if (!function_exists('ellipsis')) {
 
-    function ellipsis($cad = false, $num = 20, $ellipsis = '...')
-    {
+    function ellipsis($cad = false, $num = 20, $ellipsis = '...') {
         if (!$cad) {
             return null;
         }
@@ -351,8 +336,7 @@ if (!function_exists('ellipsis')) {
 
 if (!function_exists('getLibrary')) {
 
-    function getLibrary($libreria)
-    {
+    function getLibrary($libreria) {
 
         $rutaLibreria = LIB_PATH . $libreria . '.php';
 
@@ -367,8 +351,7 @@ if (!function_exists('getLibrary')) {
 
 if (!function_exists('subir_imagen')) {
 
-    function subir_imagen($ruta)
-    {
+    function subir_imagen($ruta) {
         getLibrary('upload' . DS . 'class.upload');
         if (substr($ruta, -1) != DS) {
             $ruta .= DS;
@@ -385,8 +368,7 @@ if (!function_exists('subir_imagen')) {
 
 if (!function_exists('array_to_str')) {
 
-    function array_to_str($arr)
-    {
+    function array_to_str($arr) {
         $r = null;
         foreach ($arr as $key => $value) {
             $key = ltrim($key, ":");
@@ -394,6 +376,21 @@ if (!function_exists('array_to_str')) {
         }
         $r = rtrim($r, ", ");
         return $r;
+    }
+
+}
+/**
+ * Funcion para quitar espacios de los nombres de indices de un array
+ * https://stackoverflow.com/questions/33945762/strip-whitespace-from-associative-array-keys
+ */
+if (!function_exists('trim_array_keys')) {
+
+    function trim_array_keys($arr) {
+
+        $a = array_map('trim', array_keys($arr));
+        $b = array_map('trim', $arr);
+        $arr = array_combine($a, $b);
+        return $arr;
     }
 
 }
