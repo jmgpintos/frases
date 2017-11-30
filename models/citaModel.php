@@ -18,8 +18,11 @@ class CitaModel extends Model {
         return $frases;
     }
 
-    public function getAllPaginated($first_record = 0, array $campos = []) {
-        $frases = parent::getAllPaginated($this->_table, $campos, $first_record, REGISTROS_POR_PAGINA);
+    public function getAllPaginated($first_record = 1, array $campos = [], $total_por_pagina = null) {
+        if (!$total_por_pagina) {
+            $total_por_pagina = REGISTROS_POR_PAGINA;
+        }
+        $frases = parent::getAllPaginated($this->_table, $campos, $first_record, $total_por_pagina, 'frase');
 
         for ($index = 0; $index < count($frases); $index++) {
             $frases[$index] = $this->_extend($frases[$index]);

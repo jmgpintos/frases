@@ -1,13 +1,18 @@
 
 <h2>FRASES</h2>
 
-
 <table >
     {foreach item=it from=$frases}
-    <tr>
-        <td>{$it.frase}</td>
-        <td>{$it.autor.nombre}</td>
-        <td>{$it.categoria.nombre}</td>
-    </tr>
+        <tr>
+            <td>{$it.id}</td>
+            <td>{$it.frase}</td>
+            <td>{$it.autor.nombre}</td>
+            <td>
+                <a href="{$_layoutParams.root}categoria/frases/{$it.categoria.id}">
+                    {$it.categoria.nombre}
+                </a>
+            </td>
+        </tr>
     {/foreach}
 </table>
+{$paginacion}

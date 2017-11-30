@@ -10,7 +10,7 @@ class AutorModel extends Model {
 
     public function getAll(array $campos = array()) {
 
-        $autores = parent::getAll($this->_table, $campos);
+        $autores = parent::getAll($this->_table, $campos, 'nombre');
         for ($i = 0; $i < count($autores); $i++) {
             $autores[$i]['total'] = $this->_get_count_from_autor($autores[$i]['id']);
         }
@@ -18,7 +18,7 @@ class AutorModel extends Model {
         return $autores;
     }
 
-    public function getAllPaginated($first_record = 0, array $campos = []) {
+    public function getAllPaginated($first_record = 1, array $campos = []) {
 //        debug_fn(__METHOD__);
 
         $autores = parent::getAllPaginated($this->_table, $campos, $first_record, REGISTROS_POR_PAGINA);

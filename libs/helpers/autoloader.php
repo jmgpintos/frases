@@ -23,9 +23,9 @@ function __autoload($class_name) {
                 debug_msg($exc->getTraceAsString());
             }
         }
-        if (!$file_exists) {
-            debug_msg(__FUNCTION__ . ": " . $class_name . '.php' . ": Fichero no existe");
-    debug($directories,'directories');
-        }
+    }
+    if (!$file_exists) {
+        debug_msg(__FUNCTION__ . ": " . $class_name . '.php' . ": Fichero no existe");
+        debug($directories, 'directories');
     }
 }

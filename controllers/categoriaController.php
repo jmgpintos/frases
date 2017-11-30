@@ -24,6 +24,10 @@ class categoriaController extends Controller {
         debug($columnas, 'columnas');
         debug($categorias, 'categorias');
     }
+    
+    public function frases($id_categoria) {
+        debug($id_categoria);
+    }
 
     public function random() {
         $cita = $this->_model;

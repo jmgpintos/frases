@@ -74,7 +74,7 @@ class Model {
         return $rs;
     }
 
-    public function getAll($table, array $campos = array()) {
+    public function getAll($table, array $campos = array(), $order = 'id') {
         $this->_log->write(__METHOD__
                 . ' - tabla => ' . $table
                 . ', campos: ' . array_to_str($campos));
@@ -88,13 +88,14 @@ class Model {
             $listaCampos = '*';
         }
 
-        $sql = "SELECT " . $listaCampos . " FROM $table ORDER BY id";
+        $sql = "SELECT " . $listaCampos . " FROM $table ORDER BY $order";
         $this->_log->write(__METHOD__ . ': ' . $sql);
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getAllPaginated(String $table, array $campos = array(), int $first_record, int $total_records) {
+    public function getAllPaginated(String $table, array $campos = array(), int $first_record, int $total_records, string $order='id') {
+        $first_record = $this->_getFirstRecord($first_record, $total_records);
         $this->_log->write(__METHOD__
                 . ' - tabla => ' . $table
                 . ', campos: ' . array_To_str($campos));
@@ -108,7 +109,8 @@ class Model {
             $listaCampos = '*';
         }
 
-        $sql = "SELECT " . $listaCampos . " FROM $table ORDER BY id LIMIT $first_record, $total_records";
+        $sql = "SELECT " . $listaCampos . " FROM $table ORDER BY $order LIMIT $first_record, $total_records";
+//        debug($sql);
         $this->_log->write(__METHOD__ . ': ' . $sql);
         $row = $this->_db->query($sql);
         return $row->fetchAll(PDO::FETCH_ASSOC);
@@ -415,6 +417,14 @@ class Model {
         $row = $this->_db->query($sql);
 
         return $row->fetchAll(PDO::FETCH_ASSOC)[0]['id'];
+    }
+
+    private function _getFirstRecord($first_record, $total_records) {
+        $fr = ($first_record - 1) * $total_records;
+        if ($fr < 0) {
+            $fr = 0;
+        }
+        return $fr;
     }
 
     /*     * ************ TEMPORAL (para pruebas)****************** */
