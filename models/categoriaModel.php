@@ -18,7 +18,7 @@ class CategoriaModel extends Model {
         return $categorias;
     }
 
-    public function getAllPaginated($first_record = 0, array $campos = []) {
+    public function getAllPaginated($first_record = 1, array $campos = []) {
         $categorias = parent::getAllPaginated($this->_table, $campos, $first_record, REGISTROS_POR_PAGINA);
 
         for ($i = 0; $i < count($categorias); $i++) {

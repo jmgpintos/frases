@@ -30,7 +30,7 @@ class autorController extends Controller {
         $this->_view->assign('columnas', $columnas);
         $this->_view->assign('titulo', $this->_titulo . ' - Indice');
         $this->_view->assign('tituloHTML', 'Autores');
-        $this->_view->renderizar('index');
+        $this->_view->renderizar('index', 'autores');
     }
 
     public function view($id = 0) {
@@ -47,7 +47,7 @@ class autorController extends Controller {
 //            debug($autor);
         }
 
-        $this->_view->renderizar('view');
+        $this->_view->renderizar('view', 'autores');
     }
 
 }

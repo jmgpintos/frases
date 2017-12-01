@@ -1,22 +1,4 @@
-<h2>Cita del d&iacute;a</h2>
-<div class='cita-bloque'>
-    <div class='frase'>{$frase.frase}</div>
-    <div class='autor'>
-        <a href='{$_layoutParams.root}autor/index/{$frase.autor.id}'>    
-            {$frase.autor.nombre}
-        </a>
-    </div>
-    <div class='categoria'>
-        <a href='{$_layoutParams.root}categoria/frases/{$frase.categoria.id}'>
-            {$frase.categoria.nombre}
-        </a>
-    </div>
-    <div class='etiquetas'>
-        {foreach from=$frase.etiquetas key=myId item=it name=foo}            
-            <a href='{$_layoutParams.root}etiquetas/frases/{$it.id}'>{$it.texto}</a>{if not $smarty.foreach.foo.last} - {/if}
-        {/foreach}
-    </div>
-</div>
+
 <h2>Categor&iacute;as</h2>
     <ul>
         <div class="lista-categorias">

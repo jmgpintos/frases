@@ -1,13 +1,279 @@
+/*COLORES*/
+/*
+GRAPE: #94618E
+EGGPLANT: #49274A
+SAND: #F4DECB
+SHELL: #F8EEE7
+*/
 body{
-    color:rgb(127,0,65);
-    background-color: rgba(127,0,65,0.2);
+    width: 1200px;
+    margin:auto;
+    color:#666;
+    color:#000;
+    background-color: #F4DECB;
+    /*background-image: url('../img/background1.jpg');*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Arima Madurai', cursive;
+}
+#footer{
+    margin-top:15px;
+    padding-top:15px;
+    border-top: 1px dotted #94618E;    
+}
+.clearfix {
+    overflow: auto;
+    clear: both;
+    display: table;
+}
+#main{
+    margin:0 50px;
 }
 
-blockquote{
+/*TITULOS*/
+h1, h2, h3{
+    color:#94618E;
+    text-shadow: 1px 1px 10px white;
+}
+h1{
+    font-size: 300%;
+}
+h2{
+    border-bottom: 3px dotted #94618E;
+}
+h2>.nombre{
+    text-transform: uppercase;
+}
+h2>.nombre:before{
+    content:open-quote;
+}
+h2>.nombre:after{
+    content:close-quote;
+}
+/*TABLAS*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table a{
+    text-decoration: none;
+    color:#666;
+}
+table th{
+    text-align: left;
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+}
+table thead{
+    margin-bottom: 50px;
+
+}
+table tr:hover{
+    background-color: #F8EEE7;
+    transition: background-color .6s;
+}
+table td{
+    border-bottom: 1px dotted #666;
+    padding-top:25px;
+}
+
+/*CITA*/
+.cita-bloque{
+    margin: 50px 15px;
+    padding:25px;
+    background-color: #49274A;
+    color:#F4DECB;
+    padding-bottom: 10px;
+
+}
+.cita-bloque a{
+    text-decoration: none;
+    color:#F4DECB;
+}
+.cita-bloque .frase{
     font-style: oblique;
     font-size: 150%;
-    font-family: sans-serif;
     text-align: center;
+    border-bottom: 1px solid #F4DECB;
+}
+
+.cita-bloque .autor{
+    text-align: right;
+    margin-bottom: 15px;
+}
+.cita-bloque .categoria{
+    text-transform: capitalize;
+    display:inline;
+}
+.cita-bloque .categoria::before{
+    content:"Categoria: ";
+    font-weight: bold;
+}
+.cita-bloque .etiquetas{
+    float: right;
+    display:inline-block;
+}
+.cita-bloque .etiquetas::before{
+    content: 'Etiquetas: ';
+    font-weight: bold;
+}
+/*MENU*/
+/* Add a black background color to the top navigation */
+.topnav {
+    /*background-color: #333;*/
     border-bottom: 1px solid black;
-    padding-bottom: 10px;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    color:black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:not(.active):hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add an active class to highlight the current page */
+.active {
+    background-color: #49274A;
+    color: #F4DECB!important;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+    display: none;
+} 
+
+/*INDEX*/
+.lista-categorias{
+    float:left;
+    width: 33%;
+}
+.lista-categorias li{
+    list-style-type: none;
+}
+.lista-categorias a{
+    text-transform: capitalize;
+    text-decoration: none;
+    color:#666;
+    font-size:150%;
+}
+/*.lista-categorias .cuenta{
+    display:inline-block;
+    top:-14px;
+    position: relative;
+    background-color: #94618E;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+}
+.lista-categorias .cuenta:before{
+    padding-left: 150px;
+}*/
+.lista-categorias .total{
+    color:#94618E;
+    font-size:85%;
+    font-style: italic;
+    font-weight: bold;
+}
+
+
+/*PAGINACION*/
+.paginacion {
+    /*margin:auto;*/
+    display: block;
+}
+.paginacion ul{
+    padding:0;
+    overflow: auto;
+}
+.paginacion li {
+    list-style-type: none;
+    float: left;
+    padding: 8px 12px;
+    transition: background-color .3s;
+}
+.paginacion a{
+    text-decoration: none;
+    color: black;
+}
+
+.paginacion li.active {
+    background-color: #94618E;
+    color: white;
+}
+.paginacion li:not(.active):hover{
+    cursor: pointer;
+    background-color: #F8EEE7;
+}
+.back_link{
+    display:inline-block;
+    float:left;
+    padding:25px;
+}
+.back_link:first-of-type{
+    padding-left: 0px;
+}
+.back_link a{
+    color:#94618E;
+    text-decoration: none;
+}
+.back_link i{
+    padding-right: 15px;
+}
+.back_link a:hover{    
+    color:#49274A;
+    transition: color .3s;
+}
+
+/*ERRORES Y MENSAJES*/
+#error{
+    width: 75%;
+    margin: 25px auto;
+    padding: 25px;
+    border: 1px solid red;
+    background-color: #F8EEE7;
+    color:red;
+}
+/*ERRORES Y MENSAJES*/
+#error, #mensaje{
+    width: 75%;
+    margin: 25px auto;
+    padding: 25px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #F8EEE7;
+    box-shadow: 3px 3px 10px black;
+}
+#error{
+    border-color: red;
+    color:red;
+}
+#mensaje{
+    border-color: green;
+    color:green;
+}
+
+#error .titulo, #mensaje .titulo {
+    font-weight: bold;
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+    margin-bottom: 8px;
+}
+
+#error .titulo{
+    border-bottom-color: red;
+}
+#mensaje .titulo {
+    border-bottom-color: green;
 }

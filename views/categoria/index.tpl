@@ -18,3 +18,4 @@
         </tr>
     {/foreach}
 </table>
+{$paginacion}

@@ -29,7 +29,20 @@ class citaController extends Controller {
         $this->_view->assign('paginacion', $paginador->getView('paginacion', 'cita/index'));
         $this->_view->assign('frases', $frases);
         $this->_view->assign('titulo', $this->_titulo . ' - Indice');
-        $this->_view->renderizar('index');
+        $this->_view->renderizar('index', 'citas');
+    }
+    
+    public function view($id_cita) {
+
+        if (!$this->filtrarInt($id_cita)) {
+            $id_cita = 0;
+        }
+        
+        $cita = $this->_model->getById($id_cita);
+        $this->_view->assign('cita',$cita);
+        $this->_view->renderizar('view', 'citas');
+        debug($cita);
+        
     }
 
     public function random() {
@@ -39,7 +52,7 @@ class citaController extends Controller {
 
         $this->_view->assign('frase', $frase);
         $this->_view->assign('titulo', $this->_titulo . ' - Cita aleatoria');
-        $this->_view->renderizar('random');
+        $this->_view->renderizar('random', 'citas');
     }
 
     public function quote_of_the_day() {

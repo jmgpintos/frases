@@ -20,7 +20,7 @@ class usuarioController extends Controller {
         $this->_view->assign('usuarios', $usuarios);
         $this->_view->assign('titulo', $this->_titulo . ' - Usuarios');
         $this->_view->assign('tituloHTML', 'Usuarios');
-        $this->_view->renderizar('index');
+        $this->_view->renderizar('index', 'usuarios');
     }
 
 }

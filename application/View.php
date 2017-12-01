@@ -76,11 +76,10 @@ class View extends Smarty {
 
     private function _getMenu() {
         $menu = [
-            ['id' => 'inicio', 'titulo' => 'inicio', 'enlace' => BASE_URL],
+            ['id' => 'inicio', 'titulo' => 'Inicio', 'enlace' => BASE_URL],
             ['id' => 'citas', 'titulo' => 'Citas', 'enlace' => BASE_URL . 'cita'],
-            ['id' => 'categorias', 'titulo' => 'Categor&iacute;as', 'enlace' => BASE_URL . 'categoria'],
-            ['id' => 'autores', 'titulo' => 'Autores', 'enlace' => BASE_URL . 'autor'],
-            ['id' => 'usuarios', 'titulo' => 'Usuarios', 'enlace' => BASE_URL . 'usuario']
+            ['id' => 'categorias', 'titulo' => 'Categor&iacute;as', 'enlace' => BASE_URL . 'categoria/lista'],
+            ['id' => 'autores', 'titulo' => 'Autores', 'enlace' => BASE_URL . 'autor']
         ];
 
         $menu = $this->_getMenuAutenticado($menu);
@@ -91,10 +90,11 @@ class View extends Smarty {
 
     public function _getMenuAutenticado($menu) {
         if (Session::estaAutenticado()) {
-            $menu[] = ['id' => 'login', 'titulo' => 'Cerrar Sesi&oacute;n', 'enlace' => BASE_URL . 'login/cerrar'];
             if (Session::esAdmin()) {
-                $menu[] = ['id' => 'registro', 'titulo' => 'Registro', 'enlace' => BASE_URL . 'registro'];
+                $menu [] = ['id' => 'usuarios', 'titulo' => 'Usuarios', 'enlace' => BASE_URL . 'usuario'];
+                $menu [] = ['id' => 'registro', 'titulo' => 'Registro', 'enlace' => BASE_URL . 'registro'];
             }
+            $menu[] = ['id' => 'login', 'titulo' => 'Cerrar Sesi&oacute;n', 'enlace' => BASE_URL . 'login/cerrar'];
         } else {
             $menu[] = ['id' => 'login', 'titulo' => 'Iniciar Sesi&oacute;n', 'enlace' => BASE_URL . 'login'];
         }

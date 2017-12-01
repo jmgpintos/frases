@@ -29,15 +29,17 @@ class AutorModel extends Model {
         return $autores;
     }
 
-    public function getById(int $id) {
+    public function getById(int $id, bool $extender = true) {
         $autor = parent::getById($this->_table, $id);
         if (count($autor) != 1) {
             return null;
         }
         $autor = $autor[0];
-        $frases = $this->_get_frases_from_autor($autor['id']);
-        $autor['total_frases'] = count($frases);
-        $autor['frases'] = $frases;
+        if ($extender) {
+            $frases = $this->_get_frases_from_autor($autor['id']);
+            $autor['total_frases'] = count($frases);
+            $autor['frases'] = $frases;
+        }
         return $autor;
     }
 
