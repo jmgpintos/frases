@@ -12,7 +12,7 @@ class loginController extends Controller {
     public function index() {
         $this->_view->assign('titulo', 'Iniciar sesi&oacute;n');
         if ($this->getInt('enviar') == 1) {
-            debug('ENVIAR');
+//            debug('ENVIAR');
             $this->_view->assign('datos', $_POST);
 
             if (!$this->getAlphaNum('usuario')) {
@@ -54,7 +54,7 @@ class loginController extends Controller {
             $this->redireccionar();
 
         }
-            debug(Session::get(),'Session');
+//            debug(Session::get(),'Session');
 
         $this->_view->renderizar('index', 'login');
 

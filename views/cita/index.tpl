@@ -4,7 +4,7 @@
 <table >
     {foreach item=it from=$frases}
         <tr>
-            <td>{$it.id}</td>
+{*            <td>{$it.id}</td>*}
             <td>{$it.frase}</td>
             <td>{$it.autor.nombre}</td>
             <td>

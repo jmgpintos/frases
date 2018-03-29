@@ -35,6 +35,22 @@ class CitaModel extends Model {
         return $this->_extend(parent::getById($this->_table, $id)[0]);
     }
 
+    public function getBusqueda($etiquetas, $pagina, $total_por_pagina) {
+        $tbl_etiqueta = parent::getTableName('etiqueta');
+        $tbl_cita_etiqueta = parent::getTableName('cita_etiqueta');
+        $implode = implode("|", $etiquetas);
+
+        $sql = "SELECT * FROM $this->_table WHERE id IN ("
+                . "SELECT id_cita FROM $tbl_cita_etiqueta WHERE id_etiqueta IN ("
+                . "SELECT id FROM $tbl_etiqueta WHERE texto REGEXP ('$implode')"
+                . "))";
+        debug($sql);
+        $resultado = parent::getSQL($sql);
+        $cuenta = count($resultado);
+        $rs = array_slice($resultado, ($pagina - 1) * $total_por_pagina, $total_por_pagina);
+        return ['cuenta' => $cuenta, 'rs' => $rs];
+    }
+
     public function getRandom() {
         $total_records = parent::getCount($this->_table);
         $id = rand(1, $total_records);

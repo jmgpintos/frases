@@ -1,5 +1,5 @@
 {if isset($autor)}
-    <h2>{$autor.nombre}</h2>
+    <h2>Frases de {$autor.nombre}</h2>
     {$autor.total_frases} frases
     <ul>
         {foreach item=it from=$autor.frases}

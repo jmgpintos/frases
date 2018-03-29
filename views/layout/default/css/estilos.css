@@ -5,29 +5,46 @@ EGGPLANT: #49274A
 SAND: #F4DECB
 SHELL: #F8EEE7
 */
+html{
+    background-image: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
 body{
     width: 1200px;
     margin:auto;
+    /*padding-bottom: 75px;*/
     color:#666;
     color:#000;
     background-color: #F4DECB;
-    /*background-image: url('../img/background1.jpg');*/
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: rgba(244,222,203,.8);
     font-family: 'Arima Madurai', cursive;
+    min-height: 700px;
+}
+#main{
+    margin:0 50px;
+    /*margin:0 50px;*/
+}
+#content{
+    min-height: 650px;    
 }
 #footer{
+    margin:0 -50px;
+    /*    width: 1200px;
+        margin:auto;*/
     margin-top:15px;
-    padding-top:15px;
-    border-top: 1px dotted #94618E;    
+    padding-top:35px;
+    padding-bottom: 15px;
+    border-top: 5px dotted #94618E;   
+    /*    position:fixed;
+        bottom:0;*/
+    background-color: #F4DECB;
 }
 .clearfix {
     overflow: auto;
     clear: both;
     display: table;
-}
-#main{
-    margin:0 50px;
 }
 
 /*TITULOS*/
@@ -37,6 +54,17 @@ h1, h2, h3{
 }
 h1{
     font-size: 300%;
+    margin-top: 0px;
+    padding-top:64px;
+}
+h1 a{
+    text-decoration: none;
+    color:#94618E;
+    transition:color .5s;
+}
+h1 a:hover{
+    color:#49274A;
+    transition:color .5s;
 }
 h2{
     border-bottom: 3px dotted #94618E;
@@ -75,6 +103,7 @@ table tr:hover{
 table td{
     border-bottom: 1px dotted #666;
     padding-top:25px;
+    padding-bottom: 15px;
 }
 
 /*CITA*/
@@ -141,6 +170,22 @@ table td{
 .topnav a:not(.active):hover {
     background-color: #ddd;
     color: black;
+}
+.topnav a.buscador{
+    float:right;
+    cursor:pointer;
+}
+.topnav a.buscador form{
+    display: inline;
+}
+#cadena-busqueda{
+    border:none;
+    border-bottom: 2px solid #94618E;
+    background-color: #F8EEE7;
+    font-family: 'Arima Madurai', cursive;
+    font-size: 115%;
+    color: #94618E;
+    padding:5px;
 }
 
 /* Add an active class to highlight the current page */
@@ -220,10 +265,11 @@ table td{
     display:inline-block;
     float:left;
     padding:25px;
+    padding-left:0;
 }
-.back_link:first-of-type{
+/*.back_link:first-of-type{
     padding-left: 0px;
-}
+}*/
 .back_link a{
     color:#94618E;
     text-decoration: none;
@@ -276,4 +322,8 @@ table td{
 }
 #mensaje .titulo {
     border-bottom-color: green;
+}
+
+.hidden{
+    display:none!important;
 }

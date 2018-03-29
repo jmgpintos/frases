@@ -33,7 +33,7 @@ class autorController extends Controller {
         $this->_view->renderizar('index', 'autores');
     }
 
-    public function view($id = 0) {
+    public function ver($id = 0) {
 //        Session::acceso(USUARIO_ROL_EDITOR);//prueba acceso
         $autor_model = $this->_model;
         $autor = $autor_model->getBYId($id);

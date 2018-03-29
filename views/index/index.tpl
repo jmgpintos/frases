@@ -2,12 +2,12 @@
 <div class='cita-bloque'>
     <div class='frase'>{$frase.frase}</div>
     <div class='autor'>
-        <a href='{$_layoutParams.root}autor/index/{$frase.autor.id}'>    
+        <a href='{$_layoutParams.root}autor/ver/{$frase.autor.id}'>    
             {$frase.autor.nombre}
         </a>
     </div>
     <div class='categoria'>
-        <a href='{$_layoutParams.root}categoria/frases/{$frase.categoria.id}'>
+        <a href='{$_layoutParams.root}categoria/ver/{$frase.categoria.id}'>
             {$frase.categoria.nombre}
         </a>
     </div>

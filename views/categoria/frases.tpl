@@ -1,4 +1,9 @@
 
+
+<div class="back_link">
+    <a href="{$_layoutParams.root}/categoria/lista"><i class="fa fa-arrow-left"></i>Volver a la lista de Categor&iacute;as</a>
+</div>
+<div class='clearfix'></div>
 <h2>Frases de la categoria <span class='nombre'>{$nombre_categoria}</span></h2>
 
 <table >
@@ -28,7 +33,3 @@
     </tbody>
 </table>
 {$paginacion}
-
-<div class="back_link">
-    <a href="{$_layoutParams.root}/categoria/lista"><i class="fa fa-arrow-left"></i>Volver a la lista de Categor&iacute;as</a>
-</div>

@@ -5,7 +5,7 @@
             {foreach from=$lista_categorias item=it}
                 {counter assign='pos'}<br />
                 <li  title="{$it.total} frases en '{$it.nombre|capitalize}'">
-                    <a href='{$_layoutParams.root}categoria/frases/{$it.id}'>
+                    <a href='{$_layoutParams.root}categoria/ver/{$it.id}'>
                         {$it.nombre}
                     </a>
 {*                    <div class="cuenta">*}

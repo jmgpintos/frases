@@ -22,7 +22,7 @@
     <body>
         <div id="main">
             <div id="header">
-                <h1>{$_layoutParams.configs.app_name}</h1>
+                <h1><a href='{$_layoutParams.root}'>{$_layoutParams.configs.app_name}</a></h1>
             </div>
 
             <div id="myTopnav" class='topnav'>
@@ -36,6 +36,21 @@
                         <a class='{$_item_style}' href="{$it.enlace}">{$it.titulo}</a>
                     {/foreach}
                 {/if}
+                <a class="buscador">
+                    <form 
+                        id="form-buscador" 
+                        name="form-buscador" 
+                        method="POST" 
+                        action="{$_layoutParams.root}cita/buscar" >
+                        <input 
+                            class="hidden"
+                            id="cadena-busqueda"
+                            type="text" 
+                            name="cadena-busqueda" 
+                            />
+                    </form>
+                    <i class="fa fa-search" onclick="jQuery('#cadena-busqueda').toggleClass('hidden').focus()"></i>
+                </a>
                 <a href="javascript:void(0);" class="icon" onclick="menuHamburger();">
                     <i class='fa fa-navicon'></i>
                 </a>

@@ -39,7 +39,7 @@ class categoriaController extends Controller {
         $this->_view->renderizar('lista', 'categorias');
     }
 
-    public function frases($id_categoria = 0, $pagina = 0) {
+    public function ver($id_categoria = 0, $pagina = 0) {
         $paginador = new Paginador();
         if (!$this->filtrarInt($id_categoria)) {
             $this->ponerError("Categoria no especificada");
@@ -62,7 +62,7 @@ class categoriaController extends Controller {
             $this->_view->assign('titulo', $this->_titulo);
             $this->_view->assign('frases', $frases_a_mostrar);
             $this->_view->assign('nombre_categoria', $nombre_categoria);
-            $this->_view->assign('paginacion', $paginador->getView('paginacion', 'categoria/frases/' . $id_categoria));
+            $this->_view->assign('paginacion', $paginador->getView('paginacion', 'categoria/ver/' . $id_categoria));
         }
 
         $this->_view->renderizar('frases', 'categorias');
